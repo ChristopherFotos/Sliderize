@@ -1,0 +1,23 @@
+* {
+    padding: 0px;
+    margin: 0px
+}
+
+.sliderize {
+    width: 50vw;
+    height: 50vh;
+    margin: auto;
+}
+
+.slider_item {
+    object-fit: cover;
+    width: 100%;
+    transition: transform 2s ease-in-out;
+}
+
+.buttons{
+    height: 20px;
+    text-align: center;
+}
+
+
