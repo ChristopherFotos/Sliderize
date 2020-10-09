@@ -5,7 +5,7 @@
 // some function(s) in the process, and various lifecycle functions 
 
 class Slider {
-    constructor(container, pictures, {slideDistance, maxSlides, loopAfter, forwardButton, backButton, autoSlide, setup,} = {}){
+    constructor(container, pictures, {slideDistance, loopAfter, forwardButton, backButton, autoSlide, setup,} = {}){
 
         this.forwardButton  = forwardButton
         this.backButton     = backButton

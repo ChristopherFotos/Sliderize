@@ -5,11 +5,11 @@ let slider = new Slider(
     document.getElementsByClassName('sliderize')[0],
     null,
     {
-    forwardButton: document.getElementsByClassName('for')[0],
-    backButton: document.getElementsByClassName('back')[0],
+    // forwardButton: document.getElementsByClassName('for')[0],
+    // backButton: document.getElementsByClassName('back')[0],
     autoSlide: 4000,
-    slideDistance:40,
-    loopAfter: 4
+    slideDistance:200,
+    loopAfter: 3
     }
 )
 
