@@ -1,0 +1,39 @@
+* {
+    padding: 0px;
+    margin: 0px
+}
+
+.sliderize {
+    width: 800px;
+    height: 600px;
+    margin: auto;
+}
+
+.slider_item {
+    object-fit: cover;
+    min-width: 200px;
+    height: 600px;
+    transition: transform 2s ease-in-out;
+}
+
+.buttons{
+    height: 20px;
+    text-align: center;
+}
+
+/* .e {
+    width: 200px
+} */
+
+.e:nth-of-type(even){
+    background-color: red;
+}
+
+.x{
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}
+
+
+
