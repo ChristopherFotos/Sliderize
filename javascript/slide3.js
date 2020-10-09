@@ -1,9 +1,16 @@
+console.log(document.getElementsByClassName('for')[0])
+console.log(document.getElementsByClassName('back')[0])
+
 let slider = new Slider(
     document.getElementsByClassName('sliderize')[0],
-    ['./images/1.jpg', './images/2.jpg', './images/3.jpg', './images/4.jpg'],
+    null,
     {
     forwardButton: document.getElementsByClassName('for')[0],
     backButton: document.getElementsByClassName('back')[0],
-    autoSlide: 4000
+    autoSlide: 4000,
+    slideDistance:40,
+    loopAfter: 4
     }
 )
+
+//['./images/1.jpg','./images/2.jpg','./images/3.jpg','./images/4.jpg']

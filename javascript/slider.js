@@ -1,5 +1,3 @@
-
-
 // allowing them to pass in an element is redundant. There's already a way to do that, it's called writing an element into your HTML. 
 // Instead, just let the user specify 'sliderizeChildren', which will make slides out of all the child elements in the container. 
 
@@ -7,7 +5,7 @@
 // some function(s) in the process, and various lifecycle functions 
 
 class Slider {
-    constructor(container, pictures, {slideDistance, forwardButton, backButton, autoSlide, setup,} = {}){
+    constructor(container, pictures, {slideDistance, maxSlides, loopAfter, forwardButton, backButton, autoSlide, setup,} = {}){
 
         this.forwardButton  = forwardButton
         this.backButton     = backButton
@@ -16,21 +14,26 @@ class Slider {
         this.offset         = 0
         this.slides         = []
         this.createPhotoContainer()
-        this.addButtonListeners()
         
-        if(pictures){
+        if(this.pictures){
             this.addPictures()
+            this.addButtonListeners()
         } else {
-            
+            this.sliderizeElements()
+            this.addButtonListeners()
         }
 
         if(!slideDistance){ 
             this.slideDistance = this.container.getBoundingClientRect().width 
+        } else if (slideDistance && loopAfter){
+            this.customSlideDistance = slideDistance
+            this.loopAfter = loopAfter + 1
         }
 
         if(autoSlide){ 
             setInterval(this.slideForward.bind(this), autoSlide) 
         }
+
 
         if(setup){ 
             if(typeof setup === 'function'){
@@ -64,14 +67,37 @@ class Slider {
         })
     }
 
+    sliderizeElements(){
+        let children = Array.from(this.container.children)
+
+        children.forEach(c => {
+            if(!c.dataset.noSlide){
+                c.classList.add('slider_item')
+                this.slides.push(c)
+                console.log(c, this.slides)
+            }
+        })
+    }
+
     slideForward(){
-        console.log('sliding')
-        if(this.offset < (this.slideDistance * this.slides.length)) {this.offset += this.slideDistance; console.log(this.offset)}
-        if(this.offset === (this.slideDistance * this.slides.length)) {this.offset = 0}
+        function f(s){
+            if(s.customSlideDistance){
+                return {a: s.customSlideDistance, b: s.loopAfter}
+            } else return {a: s.slideDistance, b: s.slides.length}
+        } 
+
+
+        if(this.offset < (f(this).a * f(this).b)) {
+            this.offset += f(this).a
+        }
+
+        if(this.offset === f(this).a * f(this).b) {
+            console.log('gfdsbgdffhghtrfse45wrgtsd')
+            this.offset = 0
+        }
 
         this.slides.forEach(s=>{
             s.style.transform = `translateX(-${this.offset}px)`
-
         })
     }
 
@@ -84,8 +110,9 @@ class Slider {
     }
 
     addButtonListeners(){
-        console.log('running')
+        console.log('running', this.forwardButton, this.backButton)
         if(this.forwardButton){
+            
             this.forwardButton.addEventListener('click', e => {
             this.slideForward()
         })}
